@@ -217,7 +217,8 @@ FFI_EXTERN ffi_type ffi_type_complex_longdouble;
 typedef enum {
   FFI_OK = 0,
   FFI_BAD_TYPEDEF,
-  FFI_BAD_ABI
+  FFI_BAD_ABI,
+  FFI_BAD_ARGTYPE
 } ffi_status;
 
 typedef struct {
@@ -308,7 +309,10 @@ typedef struct {
   void *trampoline_table;
   void *trampoline_table_entry;
 #else
-  char tramp[FFI_TRAMPOLINE_SIZE];
+	union {
+		char tramp[FFI_TRAMPOLINE_SIZE];
+		void* ftramp;
+	};
 #endif
   ffi_cif   *cif;
   void     (*fun)(ffi_cif*,void*,void**,void*);

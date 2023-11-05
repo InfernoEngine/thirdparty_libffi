@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<Module>
+	
+	<GlobalSolutionName>ThirdParty</GlobalSolutionName>
+	<GlobalNamespace>potato</GlobalNamespace>
+
+	<StaticLibrary>
+		<Name>thirdparty_libffi</Name>
+		<SourceRoot>.</SourceRoot>
+		<ExportedIncludeDirectory>include</ExportedIncludeDirectory>
+		<LocalIncludeDirectory>include</LocalIncludeDirectory>
+		<PreprocessorDefines>FFI_BUILDING;FFI_CLOSURES=1;USE_DL_PREFIX</PreprocessorDefines>
+		<ThirdParty>true</ThirdParty>
+		<ThirdPartySourceFile>
+			src\closures.c;
+			src\debug.c;
+			src\dlmalloc.c;
+			src\java_raw_api.c;
+			src\prep_cif.c;
+			src\raw_api.c;
+			src\tramp.c;
+			src\types.c
+		</ThirdPartySourceFile>
+
+		<FilterPlatform include="windows">
+			<ExportedIncludeDirectory>src\x86</ExportedIncludeDirectory>
+			<ExportedIncludeDirectory>msvc_build\aarch64\aarch64_include</ExportedIncludeDirectory>			
+			<LocalIncludeDirectory>src\x86</LocalIncludeDirectory>
+			<LocalIncludeDirectory>msvc_build\aarch64\aarch64_include</LocalIncludeDirectory>
+			<PreprocessorDefines>X86_WIN64</PreprocessorDefines>			
+			<ThirdPartySourceFile>
+				src\x86\ffi.c;
+				src\x86\ffi64.c;
+				src\x86\ffiw64.c;
+				src\x86\win64.S
+			</ThirdPartySourceFile>
+		</FilterPlatform>
+
+		<FilterPlatform include="linux">
+		</FilterPlatform>
+
+		<FilterPlatform include="darwin">
+		</FilterPlatform>
+		
+	</StaticLibrary>
+
+</Module>
